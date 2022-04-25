@@ -1,0 +1,47 @@
+--1 Problem:
+
+--Retrieve only the EMPLOYEES records that correspond to jobs in the JOBS table.
+
+SELECT  * from EMPLOYEES 
+WHERE JOB_ID IN (SELECT JOB_IDENT from JOBS);
+
+--2 Problem:
+
+--Retrieve only the list of employees whose JOB_TITLE is Jr. Designer.
+
+SELECT  * from EMPLOYEES 
+WHERE JOB_ID IN (SELECT JOB_IDENT from JOBS
+                   WHERE JOB_TITLE ="Jr. Designer" );
+
+ 
+--3 Problem:
+
+--Retrieve JOB information and who earn more than $70,000.
+
+SELECT JOB_TITLE, MIN_SALARY,MAX_SALARY,JOB_IDENT 
+FROM JOBS 
+WHERE JOB_IDENT IN 
+                (SELECT JOB_ID FROM EMPLOYEES WHERE SALARY > 70000 );
+
+
+--4 Problem:
+
+--Retrieve JOB information and whose birth year is after 1976.
+
+SELECT JOB_TITLE, MIN_SALARY,MAX_SALARY,JOB_IDENT 
+FROM JOBS 
+WHERE JOB_IDENT IN 
+                (SELECT JOB_ID FROM EMPLOYEES 
+                WHERE YEAR (B_DATE) > 1976 
+                );
+
+
+--5 Problem:
+
+--Retrieve JOB information for female employees whose birth year is after 1976.                
+
+SELECT JOB_TITLE, MIN_SALARY,MAX_SALARY,JOB_IDENT 
+FROM JOBS
+WHERE JOB_IDENT IN( SELECT JOB_ID FROM EMPLOYEES
+                   WHERE SEX = 'F' AND YEAR(B_DATE) > 1976
+                );
